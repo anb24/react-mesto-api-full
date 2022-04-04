@@ -1,0 +1,18 @@
+.profile__info {
+  display: grid;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 22px;
+  padding-left: 30px;
+  width: 100%;
+  max-width: 366px;
+  cursor: default;
+}
+
+@media (max-width: 590px) {
+  .profile__info {
+    padding-top: 26px;
+    justify-content: center;
+    max-width: 217px;
+  }
+}

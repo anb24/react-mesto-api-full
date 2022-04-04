@@ -1,0 +1,12 @@
+.form__submit_type_sign {
+  background-color: white;
+  color: black;
+  width: 100%;
+  margin-top: 216px;
+}
+
+@media (max-width: 880px) {
+  .form__submit_type_sign {
+    margin-top: 173px;
+  }
+}

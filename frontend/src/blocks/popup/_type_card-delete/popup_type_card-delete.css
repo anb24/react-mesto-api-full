@@ -1,0 +1,6 @@
+.popup_type_card-delete {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s, opacity 0.5s ease-out;
+}

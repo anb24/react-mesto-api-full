@@ -1,0 +1,24 @@
+.page {
+  background-color: #000000;
+}
+.page::-webkit-scrollbar{
+  width: 10px;
+}
+.page::-webkit-scrollbar-thumb{
+  border-width:1px 1px 1px 2px;
+  border-radius: 5px;
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(37, 37, 37);
+}
+.page::-webkit-scrollbar-thumb:hover{
+  border-width: 1px 1px 1px 2px;
+  border-color: #555;
+  background-color: #777;
+}
+.page::-webkit-scrollbar-track{
+  border-width:0;
+}
+.page::-webkit-scrollbar-track:hover{
+  border-left: solid 1px rgb(49, 49, 49);
+  background-color: rgb(5, 5, 5);
+}

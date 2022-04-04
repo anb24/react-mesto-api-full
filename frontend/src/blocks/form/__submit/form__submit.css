@@ -1,0 +1,27 @@
+.form__submit {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 358px;
+  height: 50px;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-size: 18px;
+  line-height: calc(22 / 18);
+  transition: opacity linear .1s;
+  user-select: none;
+}
+
+.form__submit:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+@media (max-width: 768px) {
+  .form__submit {
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: calc(17 / 14);
+  }
+}

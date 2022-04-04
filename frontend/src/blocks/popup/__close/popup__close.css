@@ -1,0 +1,28 @@
+.popup__close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background-image: url(../../../images/popup/exit.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 520px) {
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0px;
+    background-size: cover;
+  }
+}

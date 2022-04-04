@@ -1,0 +1,10 @@
+.profile__avatar-container {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:auto;
+}
+
+.profile__avatar-container:hover {
+  background-image: url(../../../images/profile/Edit_photo.png);
+}

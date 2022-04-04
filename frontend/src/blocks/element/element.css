@@ -1,0 +1,12 @@
+.element {
+  width: 100%;
+  max-width: 282px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  position: relative;
+}
+
+.element:hover {
+  transition: 0.5s;
+  transform: scale(1.05);
+  }

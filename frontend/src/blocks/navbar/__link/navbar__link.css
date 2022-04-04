@@ -1,0 +1,20 @@
+.navbar__link {
+  text-decoration: none;
+  color: #fff;
+
+  font-size: 14px;
+    line-height: 17px;
+  /* flex: 0 0 auto; */
+  transition: opacity .1s linear;
+}
+ 
+.navbar__link:hover {
+  opacity: .6;
+}
+
+@media (min-width: 880px) {
+  .navbar__link {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

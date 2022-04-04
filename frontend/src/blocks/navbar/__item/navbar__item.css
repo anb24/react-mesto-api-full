@@ -1,0 +1,13 @@
+.navbar__item {
+  margin-right: 24px;
+}
+
+.navbar__item:last-of-type {
+  margin-right: 0;
+}
+
+@media (max-width: 880px) {
+  .navbar__item:last-of-type {
+    margin-right: 30px;
+  }
+}
