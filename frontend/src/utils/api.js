@@ -79,9 +79,10 @@ class Api {
 }
 
 const api = new Api({
-    url: 'https://api.mestor.nomoredomains.work', headers: {
-        authorization: '147d6e49-2abf-4bec-8d5c-2f0bad3d684c', "Content-Type": "application/json",
-    }
+    url: 'https://api.mestor.nomoredomains.work',
+    // headers: {
+    //     authorization: '147d6e49-2abf-4bec-8d5c-2f0bad3d684c', "Content-Type": "application/json",
+    // }
 })
 
 export default api;
