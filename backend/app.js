@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const validator = require('validator');
 const { Joi, celebrate, errors } = require('celebrate');
-const cors = require('cors');
+const { cors } = require('./middlewares/cors');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const BadRequestError = require('./errors/BadRequestError');
@@ -16,7 +16,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors());
+app.use(cors);
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
