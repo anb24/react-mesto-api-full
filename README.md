@@ -6,5 +6,4 @@
 51.250.16.181 - публичный IP-адрес
 https://mestor.nomoredomains.work - домен
 
-
-
+https://api.mestor.nomoredomains.work - backend
