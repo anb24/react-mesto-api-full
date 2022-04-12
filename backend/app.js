@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const validator = require('validator');
 const { Joi, celebrate, errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const { cors } = require('./middlewares/cors');
+// const { cors } = require('./middlewares/cors');
+const cors = require('cors');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const BadRequestError = require('./errors/BadRequestError');
@@ -18,7 +19,12 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors);
+// app.use(cors);
+app.use(cors({
+  origin: 'https://mestor.nomoredomains.work',
+  credentials: true,
+}));
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
