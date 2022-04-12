@@ -9,11 +9,11 @@ function _checkResponse(res) {
 }
 
 export const register = (email, password) => {
-
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST', headers: {
             'Content-Type': 'application/json',
-        }, body: JSON.stringify({email, password})
+        }, credentials: 'include',
+        body: JSON.stringify({email, password})
     })
         .then(_checkResponse);
         // .then(res => res.ok ? res.json() : Promise.reject(`ОШИБКА: ${res.status}`))
@@ -31,7 +31,8 @@ export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST', headers: {
             'Content-Type': 'application/json',
-        }, body: JSON.stringify({email, password})
+        }, credentials: 'include',
+        body: JSON.stringify({email, password})
     })
         .then(_checkResponse);
         // .then(res => res.ok ? res.json() : Promise.reject(`ОШИБКА: ${res.statusText}`))
@@ -49,11 +50,11 @@ export const authorize = (email, password) => {
         // })
 };
 
-export const getContent = (token) => {
+export const getContent = (jwt) => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET', headers: {
-            'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`
-        },
+            'Content-Type': 'application/json', 'Authorization': `${jwt}`
+        }, credentials: 'include',
     })
         .then(_checkResponse);
         // .then(res => res.ok ? res.json() : Promise.reject(`ОШИБКА: ${res.statusText}`))
