@@ -26,9 +26,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 function auth(req, res, next) {
-  // const token = req.cookies.jwt;
-  const { authorization } = req.headers;
-  const token = authorization.replace('Bearer ', '');
+  const token = req.cookies.jwt;
 
   if (!token) {
     throw new UnauthorizedError('Ошибка авторизации: не найден req.cookies.jwt');
