@@ -19,7 +19,9 @@ class Api {
 
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
+            method: 'GET',
             headers: this._headers,
+            credentials: 'include',
         })
             .then(this._response)
     }
@@ -35,7 +37,9 @@ class Api {
 
     getCards() {
         return fetch(`${this._url}/cards`, {
+            method: 'GET',
             headers: this._headers,
+            credentials: 'include',
         })
             .then(this._response)
     }
