@@ -16,7 +16,7 @@ import PopupEditAvatar from "./PopupEditAvatar";
 import PopupEditProfile from "./PopupEditProfile";
 import PopupDeleteCard from "./PopupDeleteCard";
 import {userContext} from "../contexts/CurrentUserContext.js";
-import {Spinner} from "./Spinner.js"
+// import {Spinner} from "./Spinner.js"
 
 import loadingImage from '../images/avatar-loader.gif';
 import regFailedImg from "../images/reg_failed.svg";
@@ -246,7 +246,8 @@ function App() {
             });
     }
 
-    return isLoading ? (<Spinner/>) : (<userContext.Provider value={currentUser}>
+    // return isLoading ? (<Spinner/>) : (<userContext.Provider value={currentUser}>
+    return (<userContext.Provider value={currentUser}>
         <div className="page">
             <div className="page__container">
                 <Header
