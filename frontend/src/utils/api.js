@@ -1,8 +1,7 @@
 class Api {
-    constructor({url, token}) {
-        this._url = url;
-        this._headers = { "Content-Type": "application/json" };
-        this._token = token;
+    constructor({options}) {
+        this._url = options.url;
+        this._contentType = options.headers["Content-type"];
     }
 
     _response(res) {
@@ -11,7 +10,12 @@ class Api {
 
     setAvatar(data) {
         return fetch(`${this._url}/users/me/avatar`, {
-            method: 'PATCH', headers: this._headers, body: JSON.stringify({
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
+            body: JSON.stringify({
                 avatar: data.avatar
             })
         })
@@ -21,16 +25,24 @@ class Api {
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             method: 'GET',
-            headers: this._headers,
-            credentials: 'include',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
         })
             .then(this._response)
     }
 
     setUser(data) {
         return fetch(`${this._url}/users/me`, {
-            method: 'PATCH', headers: this._headers, body: JSON.stringify({
-                name: data.name, about: data.about
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
             })
         })
             .then(this._response)
@@ -39,19 +51,24 @@ class Api {
     getCards() {
         return fetch(`${this._url}/cards`, {
             method: 'GET',
-            // headers: this._headers,
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
             },
-            credentials: 'include',
         })
             .then(this._response)
     }
 
     setNewCard(data) {
         return fetch(`${this._url}/cards`, {
-            method: 'POST', headers: this._headers, body: JSON.stringify({
-                name: data.name, link: data.link
+            method: 'POST',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
             })
         })
             .then(this._response)
@@ -59,14 +76,22 @@ class Api {
 
     setCardLike(id) {
         return fetch(`${this._url}/cards/likes/${id}`, {
-            method: 'PUT', headers: this._headers,
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
         })
             .then(this._response)
     }
 
     removeCardLike(id) {
         return fetch(`${this._url}/cards/likes/${id}`, {
-            method: 'DELETE', headers: this._headers,
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
         })
             .then(this._response)
     }
@@ -80,7 +105,11 @@ class Api {
 
     deleteCard(id) {
         return fetch(`${this._url}/cards/${id}`, {
-            method: 'DELETE', headers: this._headers,
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
         })
             .then(this._response)
     }
@@ -88,9 +117,10 @@ class Api {
 
 const api = new Api({
     url: 'https://api.mestor.nomoredomains.work',
-    // headers: {
-    //     authorization: '147d6e49-2abf-4bec-8d5c-2f0bad3d684c', "Content-Type": "application/json",
-    // }
+    headers: {
+        // authorization: '147d6e49-2abf-4bec-8d5c-2f0bad3d684c',
+        "Content-Type": "application/json",
+    }
 })
 
 export default api;

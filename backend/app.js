@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const validator = require('validator');
 const { Joi, celebrate, errors } = require('celebrate');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 // const { cors } = require('./middlewares/cors');
 const cors = require('cors');
 const users = require('./routes/users');
@@ -13,7 +13,7 @@ const BadRequestError = require('./errors/BadRequestError');
 const NotFoundError = require('./errors/NotFoundError');
 const errorHandler = require('./middlewares/errorHandler');
 const { login, createUser } = require('./controllers/users');
-const { auth } = require('./middlewares/auth');
+const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -25,7 +25,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
