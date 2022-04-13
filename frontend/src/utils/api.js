@@ -1,7 +1,7 @@
 class Api {
-    constructor({options}) {
-        this._url = options.url;
-        this._contentType = options.headers["Content-type"];
+    constructor({url, headers}) {
+        this._url = url;
+        this._contentType = headers;
     }
 
     _response(res) {
