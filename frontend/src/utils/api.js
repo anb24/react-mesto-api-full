@@ -1,7 +1,8 @@
 class Api {
-    constructor({url, headers}) {
+    constructor({url, token}) {
         this._url = url;
         this._headers = { "Content-Type": "application/json" };
+        this._token = token;
     }
 
     _response(res) {
@@ -38,7 +39,10 @@ class Api {
     getCards() {
         return fetch(`${this._url}/cards`, {
             method: 'GET',
-            headers: this._headers,
+            // headers: this._headers,
+            headers: {
+                authorization: this._token,
+            },
             credentials: 'include',
         })
             .then(this._response)
