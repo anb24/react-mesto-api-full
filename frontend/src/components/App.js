@@ -57,23 +57,10 @@ function App() {
               Promise.all(promises)
                 .then((results) => {
                   setCurrentUser(results[0]);
-                  // setupCards(results[1]);
                 })
                 .catch((err) => console.log(`Error ${err}`));
           }
     }, [isLoggedIn])
-
-    // function setupCards(cards) {
-    //     setCards(
-    //       cards.map((item) => ({
-    //         _id: item._id,
-    //         link: item.link,
-    //         name: item.name,
-    //         owner: item.owner,
-    //         likes: item.likes,
-    //       }))
-    //     );
-    //   }
 
     useEffect(() => {
         tokenCheck();
@@ -245,9 +232,9 @@ function App() {
     }
 
     function handleCardLike(card) {
-        const isLiked = card.likes.some((i) => i._id === currentUser._id);
+        const isLiked = card.likes.some((i) => i === currentUser._id);
         api
-            .changeCardLike(card._id, isLiked)
+            .changeCardLike(card._id, !isLiked)
             .then((newCardSomeLike) => {
                 setCards((state) => state.map((c) => (c._id === card._id ? newCardSomeLike : c)));
             })
@@ -258,9 +245,9 @@ function App() {
 
     function handleCardDelete(card) {
         api
-            .deleteCard(cardId)
+            .deleteCard(card._id)
             .then(() => {
-                setCards((state) => state.filter((c) => c._id !== cardId));
+                setCards((state) => state.filter((c) => c._id !== card._id));
                 closeAllPopups();
             })
             .catch((err) => {
