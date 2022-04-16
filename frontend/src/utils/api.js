@@ -97,7 +97,7 @@ class Api {
     // }
 
     changeCardLike(id, like) {
-        return fetch(`${this._url}/cards/likes/${id}`, {
+        return fetch(`${this._url}/cards/${id}/likes`, {
             method: like ? 'DELETE' : 'PUT', 
             headers: {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
