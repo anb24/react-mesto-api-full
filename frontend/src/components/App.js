@@ -240,7 +240,7 @@ function App() {
 
     function handleCardDelete(card) {
         api
-            .deleteCard(card._id)
+            .deleteCard(cardId)
             .then(() => {
                 setCards((state) => state.filter((c) => c._id !== card._id));
                 closeAllPopups();
