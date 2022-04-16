@@ -148,12 +148,14 @@ function App() {
         auth.authorize(email, password)
             .then((data) => {
                 localStorage.setItem('token', data.token);
+                setIsLoggedIn(true);
+                history.push("/");
             })
-            .then(() => {
-                handleLoginStatus();
-                setUserData({email: email});
-                history.push('/');
-            })
+            // .then(() => {
+            //     handleLoginStatus();
+            //     setUserData({email: email});
+            //     history.push('/');
+            // })
             .catch((err) => {
                 handleTooltip(true, regFailedImg, "Что-то пошло не так! Попробуйте ещё раз.")
                 console.log(err);
