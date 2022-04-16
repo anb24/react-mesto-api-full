@@ -124,8 +124,27 @@ function App() {
         setInfoTooltip(false);
     }
 
+    // function tokenCheck() {
+    //     if (localStorage.getItem('token')) {
+    //         const token = localStorage.getItem('token');
+    //         if (token) {
+    //             auth.getContent(token).then((res) => {
+    //                 if (res) {
+    //                     setIsLoggedIn(true);
+    //                     console.log(res.data.email);
+    //                     setUserData({email: res.data.email});
+    //                     history.push('/');
+    //                 }
+    //             })
+    //                 .catch(err => {
+    //                     history.push('/sign-in');
+    //                     console.log(err)
+    //                 });
+    //         }
+    //     }
+    // }
+
     function tokenCheck() {
-        if (localStorage.getItem('token')) {
             const token = localStorage.getItem('token');
             if (token) {
                 auth.getContent(token).then((res) => {
@@ -141,7 +160,6 @@ function App() {
                         console.log(err)
                     });
             }
-        }
     }
 
     function handleAuthorization(email, password) {
@@ -149,6 +167,7 @@ function App() {
             .then((data) => {
                 localStorage.setItem('token', data.token);
                 setIsLoggedIn(true);
+                handleLoginStatus();
                 history.push("/");
             })
             // .then(() => {
