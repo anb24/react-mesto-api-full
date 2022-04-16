@@ -75,7 +75,7 @@ class Api {
     }
 
     setCardLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
+        return fetch(`${this._url}/cards/likes/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
