@@ -226,17 +226,42 @@ function App() {
             });
     }
 
-    function handleCardLike(card) {
-        const isLiked = card.likes.some((i) => i._id === currentUser._id);
-        api
-            .changeCardLike(card._id, isLiked)
-            .then((newCardSomeLike) => {
-                setCards((state) => state.map((c) => (c._id === card._id ? newCardSomeLike : c)));
+    // function handleCardLike(card) {
+    //     const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    //     api
+    //         .changeCardLike(card._id, isLiked)
+    //         .then((newCardSomeLike) => {
+    //             setCards((state) => state.map((c) => (c._id === card._id ? newCardSomeLike : c)));
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }
+
+    const getToken = () => {
+        return localStorage.getItem('token');
+      }
+
+    const handleCardLike = (isLiked, card) => {
+        const changeLikeCardStatus = isLiked
+            ? api.removeCardLike.bind(api)
+            : api.setCardLike.bind(api);
+        changeLikeCardStatus(getToken(), card._id, !isLiked)
+            .then(newCard => {
+              const newCards = cards.map(cardItem => cardItem._id === card._id
+              ? newCard
+              : cardItem);
+              setCards(newCards)
             })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+            .catch(err => console.log(err));
+      }
+
+
+
+
+
+
+
 
     function handleCardDelete(card) {
         api
