@@ -55,9 +55,13 @@ function App() {
               history.push("/");
               const promises = [api.getUserInfo(), api.getCards()];
               Promise.all(promises)
-                .then((results) => {
-                  setCurrentUser(results[0]);
-                })
+                // .then((results) => {
+                //   setCurrentUser(results[0]);
+                // })
+                .then(([userData, remoteCards]) => {
+                    setCurrentUser(userData);
+                    setCards(remoteCards.reverse());
+                  })
                 .catch((err) => console.log(`Error ${err}`));
           }
     }, [isLoggedIn])
@@ -231,9 +235,6 @@ function App() {
         api
             .changeCardLike(card._id, isLiked)
             .then((newCardSomeLike) => {
-                console.log(cards);
-                console.log(card);
-                console.log(newCardSomeLike);
                 setCards((state) => state.map((c) => (c._id === card._id ? newCardSomeLike : c)));
             })
             .catch((err) => {
