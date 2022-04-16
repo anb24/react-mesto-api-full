@@ -16,7 +16,7 @@ import PopupEditAvatar from "./PopupEditAvatar";
 import PopupEditProfile from "./PopupEditProfile";
 import PopupDeleteCard from "./PopupDeleteCard";
 import {userContext} from "../contexts/CurrentUserContext.js";
-// import {Spinner} from "./Spinner.js"
+import {Spinner} from "./Spinner.js"
 
 import loadingImage from '../images/avatar-loader.gif';
 import regFailedImg from "../images/reg_failed.svg";
@@ -35,7 +35,7 @@ function App() {
     });
     const [cards, setCards] = useState([]);
     const [cardId, setCardId] = useState(null);
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [infoTolltip, setInfoTooltip] = useState({
@@ -82,18 +82,18 @@ function App() {
             .catch(err => console.log('###Ошибка: данные пользователя ', err));
     }, []);
 
-    // useEffect(() => {
-    //     // setIsLoading(true);
-    //     api
-    //         .getCards()
-    //         .then((cards) => {
-    //             setCards(cards);
-    //             // setIsLoading(false);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
+    useEffect(() => {
+        setIsLoading(true);
+        api
+            .getCards()
+            .then((cards) => {
+                setCards(cards);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     function handleTooltip(isOpen, src, title) {
         setInfoTooltip({
