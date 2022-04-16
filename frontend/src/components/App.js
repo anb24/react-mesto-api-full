@@ -55,11 +55,8 @@ function App() {
               history.push("/");
               const promises = [api.getUserInfo(), api.getCards()];
               Promise.all(promises)
-                .then((results, card) => {
+                .then((results) => {
                   setCurrentUser(results[0]);
-                  if (card) {
-                    setCards(card.reverse());
-                  }
                 })
                 .catch((err) => console.log(`Error ${err}`));
           }
