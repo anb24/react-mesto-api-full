@@ -242,7 +242,7 @@ function App() {
         return localStorage.getItem('token');
       }
 
-    const handleCardLike = (isLiked, card) => {
+    const handleCardLike = (isLiked, cardId) => {
         const changeLikeCardStatus = isLiked
             ? api.removeCardLike.bind(api)
             : api.setCardLike.bind(api);
