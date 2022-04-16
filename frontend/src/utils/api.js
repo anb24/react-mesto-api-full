@@ -78,31 +78,9 @@ class Api {
 
 
 
-    // setCardLike(cardId) {
-    //     return fetch(`${this._url}/cards/${cardId}/likes`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             "Content-type": this._contentType,
-    //         },
-    //     })
-    //         .then(this._response)
-    // }
-
-    // removeCardLike(cardId) {
-    //     return fetch(`${this._url}/cards/${cardId}/likes`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             "Content-type": this._contentType,
-    //         },
-    //     })
-    //         .then(this._response)
-    // }
-
-    changeCardLike(cardId, likes) {
+    setCardLike(cardId) {
         return fetch(`${this._url}/cards/${cardId}/likes`, {
-            method: likes ? "DELETE" : "PUT", 
+            method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-type": this._contentType,
@@ -110,6 +88,28 @@ class Api {
         })
             .then(this._response)
     }
+
+    removeCardLike(cardId) {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-type": this._contentType,
+            },
+        })
+            .then(this._response)
+    }
+
+    // changeCardLike(cardId, likes) {
+    //     return fetch(`${this._url}/cards/${cardId}/likes`, {
+    //         method: likes ? "DELETE" : "PUT", 
+    //         headers: {
+    //             authorization: `Bearer ${localStorage.getItem("token")}`,
+    //             "Content-type": this._contentType,
+    //         },
+    //     })
+    //         .then(this._response)
+    // }
 
 
 
