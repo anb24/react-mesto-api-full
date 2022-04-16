@@ -242,7 +242,7 @@ function App() {
         api
             .deleteCard(cardId)
             .then(() => {
-                setCards((state) => state.filter((c) => c._id !== card._id));
+                setCards((state) => state.filter((c) => c._id !== cardId));
                 closeAllPopups();
             })
             .catch((err) => {
