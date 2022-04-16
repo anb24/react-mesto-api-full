@@ -233,7 +233,7 @@ function App() {
         const changeLikeCardStatus = isLiked
             ? api.removeCardLike.bind(api)
             : api.setCardLike.bind(api);
-        changeLikeCardStatus(cardId, isLiked)
+        changeLikeCardStatus(cardId, !isLiked)
             .then(newCard => {
               const newCards = cards.map(cardItem => cardItem._id === cardId
               ? newCard
