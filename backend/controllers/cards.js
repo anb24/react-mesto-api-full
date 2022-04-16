@@ -48,49 +48,23 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
-  const { cardId } = req.params;
-  const userId = req.user._id;
-  Card.findByIdAndUpdate(
-    cardId,
-    { $addToSet: { likes: userId } },
+  Card.findOneAndUpdate(
+    { _id: req.params.cardId },
+    { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
   )
-    .orFail(new NotFoundError('Такой карточки не существует'))
+    .orFail(() => new NotFoundError('Карточка не найдена'))
     .then((card) => res.send(card))
     .catch(next);
 };
 
 module.exports.dislikeCard = (req, res, next) => {
-  const { cardId } = req.params;
-  const userId = req.user._id;
-  Card.findByIdAndUpdate(
-    cardId,
-    { $pull: { likes: userId } },
+  Card.findOneAndUpdate(
+    { _id: req.params.cardId },
+    { $pull: { likes: req.user._id } }, // убрать _id из массива
     { new: true },
   )
-    .orFail(new NotFoundError('Такой карточки не существует'))
+    .orFail(() => new NotFoundError('Карточка не найдена'))
     .then((card) => res.send(card))
     .catch(next);
 };
-
-// module.exports.likeCard = (req, res, next) => {
-//   Card.findOneAndUpdate(
-//     { _id: req.params.cardId },
-//     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
-//     { new: true },
-//   )
-//     .orFail(() => new NotFoundError('Карточка не найдена'))
-//     .then((card) => res.send(card))
-//     .catch(next);
-// };
-
-// module.exports.dislikeCard = (req, res, next) => {
-//   Card.findOneAndUpdate(
-//     { _id: req.params.cardId },
-//     { $pull: { likes: req.user._id } }, // убрать _id из массива
-//     { new: true },
-//   )
-//     .orFail(() => new NotFoundError('Карточка не найдена'))
-//     .then((card) => res.send(card))
-//     .catch(next);
-// };
