@@ -98,7 +98,7 @@ class Api {
 
     changeCardLike(id, like) {
         return fetch(`${this._url}/cards/${id}/likes`, {
-            method: like ? "PUT" : "DELETE", 
+            method: like ? "DELETE" : "PUT", 
             headers: {
                 authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-type": this._contentType,
