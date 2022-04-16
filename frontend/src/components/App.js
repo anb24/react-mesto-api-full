@@ -43,26 +43,69 @@ function App() {
     });
 
 
+
+
+
+
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            const token = localStorage.getItem("token");
+            auth
+              .getContent(token)
+              .then((res) => {
+                if (res) {
+                  setUserData({ email: res.email });
+                }
+              })
+              history.push("/");
+              const promises = [api.getUserInfo(), api.getCards()];
+              Promise.all(promises)
+                .then((results) => {
+                  setCurrentUser(results[0]);
+                  setupCards(results[1]);
+                })
+                .catch((err) => console.log(`Error ${err}`));
+          }
+    }, [isLoggedIn])
+
+    function setupCards(cards) {
+        setCards(
+          cards.map((item) => ({
+            _id: item._id,
+            link: item.link,
+            name: item.name,
+            owner: item.owner,
+            likes: item.likes,
+          }))
+        );
+      }
+
+
+
+
+
+
     useEffect(() => {
         tokenCheck();
         api.getUserInfo()
             .then(data => setCurrentUser(data))
             .catch(err => console.log('###Ошибка: данные пользователя ', err));
     }, []);
-    useEffect(() => {
-        if (isLoggedIn) {
-            Promise.all([api.getUserInfo(), api.getCards()])
-                .then(([currentUserData, card]) => {
-                    setCurrentUser(currentUserData);
-                    if (card) {
-                        setCards(card.reverse());
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
-        }
-    }, [isLoggedIn]);
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         Promise.all([api.getUserInfo(), api.getCards()])
+    //             .then(([currentUserData, card]) => {
+    //                 setCurrentUser(currentUserData);
+    //                 if (card) {
+    //                     setCards(card.reverse());
+    //                 }
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //             });
+    //     }
+    // }, [isLoggedIn]);
     useEffect(() => {
         // setIsLoading(true);
         api
@@ -124,27 +167,8 @@ function App() {
         setInfoTooltip(false);
     }
 
-    // function tokenCheck() {
-    //     if (localStorage.getItem('token')) {
-    //         const token = localStorage.getItem('token');
-    //         if (token) {
-    //             auth.getContent(token).then((res) => {
-    //                 if (res) {
-    //                     setIsLoggedIn(true);
-    //                     console.log(res.data.email);
-    //                     setUserData({email: res.data.email});
-    //                     history.push('/');
-    //                 }
-    //             })
-    //                 .catch(err => {
-    //                     history.push('/sign-in');
-    //                     console.log(err)
-    //                 });
-    //         }
-    //     }
-    // }
-
     function tokenCheck() {
+        if (localStorage.getItem('token')) {
             const token = localStorage.getItem('token');
             if (token) {
                 auth.getContent(token).then((res) => {
@@ -160,6 +184,7 @@ function App() {
                         console.log(err)
                     });
             }
+        }
     }
 
     function handleAuthorization(email, password) {
