@@ -42,12 +42,6 @@ function App() {
         isOpen: false, src: '', title: '',
     });
 
-
-
-
-
-
-
     useEffect(() => {
         if (isLoggedIn) {
             const token = localStorage.getItem("token");
@@ -63,28 +57,23 @@ function App() {
               Promise.all(promises)
                 .then((results) => {
                   setCurrentUser(results[0]);
-                  setupCards(results[1]);
+                  // setupCards(results[1]);
                 })
                 .catch((err) => console.log(`Error ${err}`));
           }
     }, [isLoggedIn])
 
-    function setupCards(cards) {
-        setCards(
-          cards.map((item) => ({
-            _id: item._id,
-            link: item.link,
-            name: item.name,
-            owner: item.owner,
-            likes: item.likes,
-          }))
-        );
-      }
-
-
-
-
-
+    // function setupCards(cards) {
+    //     setCards(
+    //       cards.map((item) => ({
+    //         _id: item._id,
+    //         link: item.link,
+    //         name: item.name,
+    //         owner: item.owner,
+    //         likes: item.likes,
+    //       }))
+    //     );
+    //   }
 
     useEffect(() => {
         tokenCheck();
@@ -92,32 +81,19 @@ function App() {
             .then(data => setCurrentUser(data))
             .catch(err => console.log('###Ошибка: данные пользователя ', err));
     }, []);
+
     // useEffect(() => {
-    //     if (isLoggedIn) {
-    //         Promise.all([api.getUserInfo(), api.getCards()])
-    //             .then(([currentUserData, card]) => {
-    //                 setCurrentUser(currentUserData);
-    //                 if (card) {
-    //                     setCards(card.reverse());
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err)
-    //             });
-    //     }
-    // }, [isLoggedIn]);
-    useEffect(() => {
-        // setIsLoading(true);
-        api
-            .getCards()
-            .then((cards) => {
-                setCards(cards);
-                // setIsLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+    //     // setIsLoading(true);
+    //     api
+    //         .getCards()
+    //         .then((cards) => {
+    //             setCards(cards);
+    //             // setIsLoading(false);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, []);
 
     function handleTooltip(isOpen, src, title) {
         setInfoTooltip({
