@@ -158,11 +158,6 @@ function App() {
                 handleLoginStatus();
                 history.push("/");
             })
-            // .then(() => {
-            //     handleLoginStatus();
-            //     setUserData({email: email});
-            //     history.push('/');
-            // })
             .catch((err) => {
                 handleTooltip(true, regFailedImg, "Что-то пошло не так! Попробуйте ещё раз.")
                 console.log(err);
